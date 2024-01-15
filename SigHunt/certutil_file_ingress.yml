@@ -1,5 +1,5 @@
-title: HTA payload
-id: 20a1b783-80ed-4510-adf4-f9a3ac4b6745
+title: Certutil Download
+id: 7109b0ac-f47e-4343-bb3c-0627a386295c
 status: Experimental
 description: lab
 author: ranc1d
@@ -11,8 +11,11 @@ logsource:
 detection:
   selection:
    EventID: 1
-   ParentImage|endswith: '\chrome.exe'
-   Image|endswith: '\mshta.exe'
+   ParentImage|endswith: '\cmd.exe'
+   Image|endswith: '\certutil.exe'
+   CommandLine|contains:
+    - '-urlcache'
+    - '-split'
   condition: selection
 fields:
 falsepositives:
