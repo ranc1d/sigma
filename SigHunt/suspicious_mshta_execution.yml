@@ -1,0 +1,22 @@
+title: HTA payload
+id: 20a1b783-80ed-4510-adf4-f9a3ac4b6745
+status: Experimental
+description: lab
+author: ranc1d
+date:
+modified:
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+   EventID: 1
+   ParentImage|endswith: '\chrome.exe'
+   Image|endswith: '\mshta.exe'
+  condition: selection
+fields:
+falsepositives:
+level: medium
+tags:
+  - attack.credential_access
+  - attack.t1110
