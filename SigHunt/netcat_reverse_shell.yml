@@ -1,0 +1,24 @@
+title: Netcat Execution
+id: fe7541db-2b4e-4915-b0d4-ef64b506b7e7
+status: Experimental
+description: lab
+author: ranc1d
+date:
+modified:
+logsource:
+  product: windows
+  service: sysmon
+  category: process_creation
+detection:
+  selection:
+   EventID: 1
+   Image|endswith: '*.exe'
+   CommandLine|contains:
+    - ' -e cmd.exe'
+   Hashes|contains: 'MD5=523613A7B9DFA398CBD5EBD2DD0F4F38'
+  condition: selection
+fields: 
+falsepositives:
+level: medium
+tags:
+  - attack.command_and_control
