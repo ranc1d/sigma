@@ -1,0 +1,24 @@
+title: Challenge 5 Service Binary Modification
+id: 7109b0ac-f47e-4343-bb3c-0627a38d295c
+status: Experimental
+description: lab
+author: ranc1d
+date:
+modified:
+logsource:
+  product: windows
+  service: sysmon
+detection:
+  selection:
+   EventID: 1
+   Image|endswith: '\sc.exe'
+   CommandLine|contains:
+    - 'sc.exe config snmptrap binPath= '
+    - '-e cmd.exe'
+  condition: selection
+fields:
+falsepositives:
+level: medium
+tags:
+  - attack.defense_evation
+  - attack.T1218.005
