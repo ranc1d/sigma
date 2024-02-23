@@ -1,0 +1,28 @@
+title: Challenge 4 PowerUp Enumeration
+id: 52eac1b39-07fd-4c3c-affc-e2eafe8c7902
+status: test
+description: Detects powerup enumeration powershell
+references:
+ - https://github.com/PowerShellMafia/PowerSploit/blob/master/Privesc/PowerUp.ps1
+author: ranc1d
+date: 2024/02/20
+modified: 2024/02/20
+tags:
+ - attack.privilege_escalation
+logsource:
+ category: process_creation
+ service: sysmon
+ product: windows
+detection:
+ selection:
+   EventID: 1
+   Image|endswith: 'powershell.exe'
+   CommandLine|contains:
+    - 'powershell'
+    - 'powerup.ps1'
+    - 'Invoke-AllChecks'
+ condition: selection
+fields: 
+falsepositives:
+ - none
+level: low
